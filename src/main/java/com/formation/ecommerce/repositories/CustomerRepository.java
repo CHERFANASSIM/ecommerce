@@ -6,4 +6,6 @@ import com.formation.ecommerce.models.entities.Customer;
 
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
+	boolean existsByName(String value);
+
 }

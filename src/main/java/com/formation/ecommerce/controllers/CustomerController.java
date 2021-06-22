@@ -1,5 +1,7 @@
 package com.formation.ecommerce.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.formation.ecommerce.models.dtos.CustomerCreate;
 import com.formation.ecommerce.models.entities.Customer;
 import com.formation.ecommerce.services.CustomerService;
 
@@ -20,9 +23,9 @@ public class CustomerController {
 		this.service = service;
 	}
 
-	@PostMapping
-	public void create(@RequestBody Customer customer) {
-		service.create(customer);
+	@PostMapping("/create")
+	public void createCustomer(@Valid @RequestBody CustomerCreate dto) {
+		service.createCustome(dto);
 	}
 
 	@GetMapping("/{id}")

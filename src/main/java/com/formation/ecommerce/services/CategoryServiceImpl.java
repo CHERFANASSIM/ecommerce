@@ -2,8 +2,6 @@ package com.formation.ecommerce.services;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.stereotype.Service;
 
 import com.formation.ecommerce.models.dtos.CategoryCreate;
@@ -28,7 +26,7 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public void createCategory(@Valid CategoryCreate dto) {
+	public void createCategory(CategoryCreate dto) {
 		Category category = new Category();
 		category.setName(dto.getName());
 		category.setDescription(dto.getDescription());
