@@ -6,20 +6,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "command_Lines")
 public class CommandLine {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idCommandLine;
 	@ManyToOne
-	@JoinColumn(name = "idProduct")
+	@JoinColumn(name = "id_Product")
 	private Product product;
 	private int quantity;
 	private double price;
 	@ManyToOne
-	@JoinColumn(name = "idCommand")
+	@JoinColumn(name = "id_Command")
 	private Command command;
 
 	public CommandLine() {

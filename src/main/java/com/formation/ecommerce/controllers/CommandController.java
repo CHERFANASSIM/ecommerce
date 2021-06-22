@@ -1,5 +1,7 @@
 package com.formation.ecommerce.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +24,7 @@ public class CommandController {
 	}
 
 	@PostMapping("/create")
-	public void createCommand(@RequestBody CommandCreate dto) {
+	public void createCommand(@Valid @RequestBody CommandCreate dto) {
 		service.createCommand(dto);
 	}
 

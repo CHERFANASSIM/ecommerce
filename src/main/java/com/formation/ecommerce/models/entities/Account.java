@@ -7,16 +7,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "accounts")
 public class Account {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = " user_name", unique = true, nullable = false)
+	@Column(name = " username", unique = true, nullable = false)
 	private String userName;
-	@Column(name = " pass_word", nullable = false)
+	@Column(name = " password", nullable = false)
 	private String password;
 
 	@Column(name = "activated", nullable = false)

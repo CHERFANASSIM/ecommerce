@@ -10,7 +10,7 @@ public class CommandCreate {
 	private LocalDate date;
 	@NotNull
 
-	private int CustomerId;
+	private Long customerId;
 
 	public CommandCreate() {
 	}
@@ -23,22 +23,12 @@ public class CommandCreate {
 		this.date = date;
 	}
 
-	/*
-	 * public Long getCustomerId() { return CustomerId; }
-	 * 
-	 * public void setCustomerId(Long customerId) { CustomerId = customerId; }
-	 */
-	@Override
-	public String toString() {
-		return "CommandCreate [date=" + date + ", CustomerId=" + CustomerId + "]";
+	public Long getCustomerId() {
+		return customerId;
 	}
 
-	public int getCustomerId() {
-		return CustomerId;
-	}
-
-	public void setCustomerId(int customerId) {
-		CustomerId = customerId;
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
 	}
 
 }

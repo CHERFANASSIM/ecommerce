@@ -16,7 +16,7 @@ public class Role {
 
 	@Column(name = "code", nullable = false, unique = true)
 	private String code;
-
+	@Column(name = "default_role", nullable = false)
 	private boolean defaultRole;
 
 	public Role() {
