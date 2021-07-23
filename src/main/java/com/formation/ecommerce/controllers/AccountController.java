@@ -14,6 +14,7 @@ import com.formation.ecommerce.services.AccountService;
 
 @RestController
 @RequestMapping("/accounts")
+
 public class AccountController {
 
 	private final AccountService service;
@@ -33,25 +34,5 @@ public class AccountController {
 	public IdToken login(@Valid @RequestBody AccountLogin dto) {
 		return service.login(dto);
 	}
-
-//	@PostMapping("/login")
-//	public String login(@Valid @RequestBody AccountLogin dto) {
-//
-//		String name = dto.getUserName();
-//
-//
-//		String password = service.getPasswordByName(name);
-//
-//		if (password == null) {
-//			return "user don't existe";
-//		}
-//
-//		if ((dto.getPassword()).equals(password)) {
-//			return "credentiel est bon";
-//		} else {
-//			return "is not same password";
-//		}
-//
-//	}
 
 }

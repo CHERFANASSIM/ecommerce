@@ -20,16 +20,16 @@ public class ProductCreate {
 	@NotNull
 	private Long idCategory;
 
+	public ProductCreate() {
+
+	}
+
 	public Long getIdCategory() {
 		return idCategory;
 	}
 
 	public void setIdCategory(Long idCategory) {
 		this.idCategory = idCategory;
-	}
-
-	public ProductCreate() {
-
 	}
 
 	public Long getIdProduct() {

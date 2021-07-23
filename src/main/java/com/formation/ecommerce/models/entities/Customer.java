@@ -2,11 +2,14 @@ package com.formation.ecommerce.models.entities;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -16,17 +19,26 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	// @Column(name = "customer_id")
+
 	private Long idCustomer;
-
+	@Column(name = "name", nullable = false)
 	private String name;
-	private String adresse;
+	// @Column(name = "adresse", nullable = false)
+	// private String adresse;
+	@Column(name = "email", nullable = false)
 	private String email;
+	@Column(name = "phone", nullable = false)
 	private String phone;
-
 	@OneToMany(mappedBy = "customer")
 	@JsonIgnore
 	private List<Command> commands;
+	@OneToOne
+	@JoinColumn(name = "id_addresses")
+	private Address adresse;
+
+	@OneToOne // (mappedBy = "customer")
+	@JoinColumn(name = "id_accounts")
+	private Account account;
 
 	public Customer() {
 	}
@@ -55,12 +67,20 @@ public class Customer {
 		this.idCustomer = idCustomer;
 	}
 
-	public String getAdresse() {
+	public Address getAdresse() {
 		return adresse;
 	}
 
-	public void setAdresse(String adresse) {
+	public void setAdresse(Address adresse) {
 		this.adresse = adresse;
+	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 
 	public String getEmail() {

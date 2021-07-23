@@ -33,7 +33,7 @@ public class ProductController {
 		service.createProduct(dto);
 	}
 
-	@GetMapping("/products/getbyid/{id}")
+	@GetMapping("/products/byid/{id}")
 	public Product getProductById(@PathVariable("id") long id) {
 		return service.getProductById(id);
 	}
@@ -48,19 +48,19 @@ public class ProductController {
 		return service.getProductByName(name);
 	}
 
+	@DeleteMapping("/products/{id}/delete")
+	public String DeleteProduct(@PathVariable("id") long id) {
+		service.DeleteProduct(id);
+
+		return "Product deleted";
+	}
+
 	@PutMapping("/products/{id}")
 	public String UpdateProduct(@PathVariable("id") long id, @RequestBody ProductUpdate dto) {
 		service.UpdateProduct(id, dto);
 
 		return "product updated";
 
-	}
-
-	@DeleteMapping("/products/{id}\"")
-	public String DeleteProduct(@PathVariable("id") long id) {
-		service.DeleteProduct(id);
-
-		return "Categorie deleted";
 	}
 
 }

@@ -17,7 +17,7 @@ import javax.persistence.Table;
 public class Command {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	// @Column(name = "command_id")
+
 	private Long idCommand;
 	private LocalDate date;
 	@OneToMany(mappedBy = "command")

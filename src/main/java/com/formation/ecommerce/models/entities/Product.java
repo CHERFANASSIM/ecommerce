@@ -16,22 +16,17 @@ public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idProduct;
-
 	@Column(name = "name", nullable = false)
 	private String name;
-
 	@Column(name = "description", nullable = false)
 	private String description;
-
 	@Column(name = "price", nullable = false)
 	private double price;
-
 	@ManyToOne
 	@JoinColumn(name = "id_Category", nullable = false)
 	private Category category;
 
 	public Product() {
-
 	}
 
 	public Long getIdProduct() {

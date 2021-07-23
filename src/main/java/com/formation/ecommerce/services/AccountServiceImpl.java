@@ -41,11 +41,8 @@ public class AccountServiceImpl implements AccountService {
 		String encoded = encoder.encode(raw);
 		account.setPassword(encoded);
 		account.setActived(true);
-
 		Role role = roles.findByDefaultRole(true);
-
 		account.setRole(role);
-
 		accounts.save(account);
 	}
 

@@ -53,7 +53,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Value("${my-app.jwt.keystore.alias}")
 	private String alias;
 
-	//
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -61,41 +60,40 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		// @formatter:off
- 
-		// Diasable unsued default confuguration
+
 		http.csrf().disable().httpBasic().disable().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-				// aply business requirments (securty)
+
 				.and().authorizeRequests().antMatchers(HttpMethod.POST, "/accounts", "/accounts/login").permitAll()
-				.antMatchers(HttpMethod.GET, "/tests/anonmymous-only").anonymous()
-				.antMatchers(HttpMethod.GET, "/tests/basic-only").hasRole("BASIC")
-				.antMatchers(HttpMethod.GET, "/tests/admin-only").hasRole("ADMIN")
+				.antMatchers(HttpMethod.GET, "/api/categories/byid/{id}").permitAll()
+				.antMatchers(HttpMethod.GET, "/api/categories").permitAll()
+				.antMatchers(HttpMethod.GET, "/api/categories/{name}/name").permitAll()
+
+				.antMatchers(HttpMethod.GET, "/api/products/byid/{id}").permitAll()
+				.antMatchers(HttpMethod.GET, "/api/products/{name}/name").permitAll()
+				.antMatchers(HttpMethod.GET, "/api/products/").permitAll()
+
 				.antMatchers(HttpMethod.POST, "/api/categories/create").hasRole("ADMIN")
-				.antMatchers(HttpMethod.GET, "/tests/manager-only").hasRole("MANAGER")
-				.antMatchers(HttpMethod.GET, "/tests/admin-only").hasAnyRole("ADMIN","MANAGER")
-				.antMatchers(HttpMethod.GET, "/tests/admin-manager-only").hasAnyRole("ADMIN","MANAGER")
-				.antMatchers(HttpMethod.POST, "/api/categories/create").hasRole("ADMIN")
+				// .antMatchers(HttpMethod.DELETE,
+				// "/api/categories/{id}/delete").hasRole("ADMIN")
+				.antMatchers(HttpMethod.DELETE, "/api/products/{id}/delete").hasRole("ADMIN")
 				.antMatchers(HttpMethod.POST, "/api/products/create").hasRole("ADMIN")
-				.antMatchers(HttpMethod.GET, "/api/categories").hasRole("ADMIN")
-				.antMatchers(HttpMethod.GET, "/api/categories/byid/{id}").hasRole("ADMIN")
-				.antMatchers(HttpMethod.GET, "/api/categories/{name}/name").hasRole("ADMIN")
+				// .antMatchers(HttpMethod.GET, "/api/categories").hasRole("ADMIN")
+				// .antMatchers(HttpMethod.GET, "/api/categories/byid/{id}").hasRole("ADMIN")
+
+				// categories/byid/{id}
+				// .antMatchers(HttpMethod.GET, "/api/categories/byid/{id}").hasRole("ADMIN")
+				// .antMatchers(HttpMethod.GET, "/api/categories/{name}/name").hasRole("ADMIN")
 				.antMatchers(HttpMethod.POST, "/commands/create").hasRole("BASIC")
 				.antMatchers(HttpMethod.POST, "/customers/create").hasRole("BASIC")
 				.antMatchers(HttpMethod.POST, "/commandLine/create").hasRole("BASIC")
-				///customers
+				/// customers
 				///
-				.antMatchers(HttpMethod.GET, "/tests/admin-basic-only").hasAnyRole("ADMIN","BASIC")
+				.antMatchers(HttpMethod.GET, "/tests/admin-basic-only").hasAnyRole("ADMIN", "BASIC")
 
-				// antMatchers = mvcMatchers->
-				// post "/accounts"
-				// post "/accounts/" il va l'igoré le antMatchers
-				// mvcMatchers il va autorizé "/accounts","/accounts/","/accounts.html"
-				// Unauthorized any other endpoint
+				.anyRequest().fullyAuthenticated().and().oauth2ResourceServer().jwt()
+				.jwtAuthenticationConverter(jwtConverter());
 
-				.anyRequest().fullyAuthenticated().and().oauth2ResourceServer()
-				.jwt().jwtAuthenticationConverter(jwtConverter());
-		// @formatter:on
 	}
 
 	@Bean
